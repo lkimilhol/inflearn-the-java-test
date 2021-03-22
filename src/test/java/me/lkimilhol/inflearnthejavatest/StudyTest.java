@@ -9,6 +9,7 @@ class StudyTest {
     @Test
     void Create() {
         Study study = new Study();
+        System.out.println("create");
         assertNotNull(study);
     }
 
