@@ -21,3 +21,34 @@
 > * BeforeEach: 각각의 테스트를 실행하기 이전에 실행이 된다. static일 필요는 없다.
 > * AfterEach: 각각의 테스트를 실행하고 나서 실행이 된다.
 > * Disable: 테스트를 실행하지 않는다.
+
+###1-3 테스트 이름 표시하기
+
+* DisplayNameGeneration 전략을 통해 이름 표기가 가능 (모든 메소드에 적용 가능) 
+* DisplayName 으로 이름 표기 가능. 직접 이름을 넣어 줄 수가 있다.
+
+###1-4 Assertion
+
+* assertEquals(StudyStatus.DRAFT, study.getStatus(), "스터디를 처음 만들면 DRAFT여야 한다"); 식으로 메시지를 줄 수 있다. 메시지를 supplier 람다를 사용 할 수도 있다.
+* 위 메서드의 안에 expected를 넣어주고 실제 나오는 값을 넣어주면 된다.
+
+* 식으로 가능하다는 이야기 
+```
+assertEquals(StudyStatus.DRAFT, study.getStatus(), new Supplier<String>() {
+            @Override
+            public String get() {
+                return "스터디를 처음 만들면 DRAFT여야 한다";
+            }
+        });
+```
+* 람다식으로 만들어 주면 문자열을 만드는 연산을 하지 않는다. 최대한 필요한 시점에 한다는 이야기. (실패했을때만 실행한다.)
+* 만약 실패하는 테스트 케이스가 있는 경우 그 아래에 있는 테스트케이스는 실행되지 않는다. 하지만 assertAll을 사용하면 모두 실행을 한다.
+* assertTimeout의 경우 Thread.sleep에서 준 시간만큼 기다리게 되는데, assertTimeoutPreemptively를 실행하면 설정 된 시간이 넘어가면 즉각 종료가 된다.
+* ThreadLocal을 사용하는 경우에는 예상치 못한 결과가 나올 수 있다. ThreadLocal은 스레드 공유가 되지 않는다. (Spring 트랜잭션이 기본적으로 threadLocal을 기본 전략으로 사용함)
+* **즉 threadLocal을 사용해서 실제 db에 반영이 될 수 있다(롤백이 되지 않기 때문에)**. 트랜잭션에 관련된 스레드와 별개의 스레드로 사용하기 때문.
+
+
+
+
+
+

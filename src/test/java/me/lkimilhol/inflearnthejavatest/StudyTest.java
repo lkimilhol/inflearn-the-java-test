@@ -8,9 +8,16 @@ class StudyTest {
 
     @Test
     void Create() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new Study(-10));
+        String message = exception.getMessage();
+        assertEquals("limit", message);
+
         Study study = new Study();
         System.out.println("create");
-        assertNotNull(study);
+        assertAll(
+                () -> assertEquals(StudyStatus.DRAFT, study.getStatus(), "스터디를 처음 만들면 DRAFT여야 한다"),
+                () -> assertNotNull(study)
+        );
     }
 
     @BeforeAll
