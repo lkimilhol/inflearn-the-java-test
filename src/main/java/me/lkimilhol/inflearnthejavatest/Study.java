@@ -21,4 +21,8 @@ public class Study {
     public StudyStatus getStatus() {
         return status;
     }
+
+    public int getLimit() {
+        return limit;
+    }
 }
