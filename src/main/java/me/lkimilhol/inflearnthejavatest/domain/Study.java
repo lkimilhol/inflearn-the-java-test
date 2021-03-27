@@ -1,15 +1,22 @@
-package me.lkimilhol.inflearnthejavatest;
+package me.lkimilhol.inflearnthejavatest.domain;
 
-import org.yaml.snakeyaml.tokens.AliasToken;
+import me.lkimilhol.inflearnthejavatest.StudyStatus;
 
 public class Study {
+
+    private Member member;
 
     private StudyStatus status = StudyStatus.DRAFT;
     private int limit;
     private String name;
 
+
     public Study() {
 
+    }
+
+    public void setOwner(Member member) {
+        this.member = member;
     }
 
     public Study(int limit, String name) {
