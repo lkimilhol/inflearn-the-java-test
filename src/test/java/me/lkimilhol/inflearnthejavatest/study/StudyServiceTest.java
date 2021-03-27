@@ -19,6 +19,7 @@ class StudyServiceTest {
     @Test
     void createStudyService( @Mock MemberService memberService, @Mock StudyRepository studyRepository) {
         StudyService studyService = new StudyService(memberService, studyRepository);
+
         assertNotNull(studyService);
     }
 }
