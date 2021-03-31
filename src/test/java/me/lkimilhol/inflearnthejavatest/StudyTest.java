@@ -25,8 +25,8 @@ class StudyTest {
     @FastTest
     @DisplayName("스터디 만들기 fast1")
     void create_new_study() {
-        Study actual = new Study(1000);
-        assertEquals(1000, actual.getLimit());
+        Study actual = new Study(1000, "java");
+        assertEquals(1000, actual.getLimitCount());
         value++;
         System.out.println(value);
     }
@@ -51,7 +51,7 @@ class StudyTest {
     @ParameterizedTest(name = "{index} {displayName} message={0}")
     @ValueSource(ints = {10, 20, 40})
     void parameterizedTest1(@ConvertWith(StudyConverter.class) Study study) {
-        System.out.println(study.getLimit());
+        System.out.println(study.getLimitCount());
     }
 
     @DisplayName("스터디 만들기")
@@ -74,7 +74,7 @@ class StudyTest {
         @Override
         protected Object convert(Object o, Class<?> aClass) throws ArgumentConversionException {
             assertEquals(Study.class, aClass);
-            return new Study(Integer.parseInt(o.toString()));
+            return new Study(Integer.parseInt(o.toString()), "java");
         }
     }
 

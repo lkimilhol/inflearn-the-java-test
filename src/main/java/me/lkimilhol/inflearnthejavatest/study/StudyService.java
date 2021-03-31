@@ -18,6 +18,13 @@ public class StudyService {
         this.repository = repository;
     }
 
+    public Study openStudy(Study study) {
+        study.open();
+        Study openedStudy = repository.save(study);
+        memberService.notify(study);
+        return openedStudy;
+    }
+
     public Study createNewStudy(Long memberId, Study study) {
         Optional<Member> member = memberService.findById(memberId);
         study.setOwner(member.orElseThrow(() -> new IllegalArgumentException("Member error")));
